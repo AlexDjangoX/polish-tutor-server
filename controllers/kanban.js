@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export const createKanban = async (req, res) => {
   const kanbanData = req.body;
-  const id = Number(req.params.id);
+  const id = String(req.params.id);
 
   console.log('KANBAN BOARD REQUEST BODY : ', kanbanData);
   console.log('IDENTITY : ', id);
@@ -14,7 +14,7 @@ export const createKanban = async (req, res) => {
     }
 
     const kanban = await prisma.kanban.create({
-      data: { kanbanObject: kanbanData, userId: 1 },
+      data: { kanbanObject: kanbanData, userId: 3 },
     });
   } catch (error) {
     console.error(error.message);
