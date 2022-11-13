@@ -37,8 +37,15 @@ export const createKanban = async (req, res) => {
 
 export const getKanbanByUserId = async (req, res) => {
   try {
-    // const kanban = await prisma.kanban.findMany({});
-    // res.json({ kanban });
+    const id = Number(req.params.id.split('|')[1].replace(/[a-z]/gi, ''));
+    const foundKanban = await prisma.kanban.findUnique({
+      where: { userId: id },
+    });
+    if (!foundKanban || !id) {
+      throw new Error('Please provide valid user');
+    }
+    console.log('FOUND KANBAN : ', foundKanban);
+    res.status(200).json({ data: foundKanban });
   } catch (error) {
     console.error(error.message);
   }
