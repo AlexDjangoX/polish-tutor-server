@@ -44,10 +44,7 @@ export const getKanbanByUserId = async (req, res) => {
     if (!foundKanban || !id) {
       throw new Error('Please provide valid user');
     }
-    // console.log(
-    //   'FOUND KANBAN : ',
-    //   foundKanban.kanbanObject.columnFour.items[1].id
-    // );
+
     res.status(200).json({ data: foundKanban });
   } catch (err) {
     console.log(err);

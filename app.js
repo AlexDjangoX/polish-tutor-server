@@ -33,11 +33,6 @@ app.get('/', async (req, res, next) => {
   res.send({ message: 'Index entry point route' });
 });
 
-// app.post('/protected/:id', jwtCheck, (req, res) => {
-//   console.log('REQ.BODY : ', req.body.columnOne.items[0].id);
-//   res.status(200).send({ message: 'Protected route' });
-// });
-
 app.use('/users', userRouter);
 app.use('/protected/kanban', jwtCheck, kanbanRoutes);
 
