@@ -8,12 +8,19 @@ import pkg from 'express-jwt';
 const { expressjwt } = pkg;
 import jwks from 'jwks-rsa';
 
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 export const app = express();
 app.disable('x-powered-by');
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
+
+app.use(express.static(path.join(__dirname + '/public')));
 
 export const jwtCheck = expressjwt({
   secret: jwks.expressJwtSecret({
