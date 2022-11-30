@@ -40,9 +40,9 @@ app.get('/', async (req, res, next) => {
   res.send({ message: 'Index entry point route' });
 });
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/public', '/index.html'));
-});
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/public', '/index.html'));
+// });
 
 app.use('/users', userRouter);
 app.use('/protected/kanban', jwtCheck, kanbanRoutes);
