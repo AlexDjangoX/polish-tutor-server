@@ -22,6 +22,10 @@ app.use(morgan('dev'));
 
 app.use(express.static(path.join(__dirname + '/public')));
 
+app.get('/*', async (req, res, next) => {
+  res.sendFile(path.join(__dirname, '/public', '/index.html'));
+});
+
 export const jwtCheck = expressjwt({
   secret: jwks.expressJwtSecret({
     cache: true,
@@ -35,14 +39,6 @@ export const jwtCheck = expressjwt({
 }).unless({ path: ['/'] });
 
 app.use(jwtCheck);
-
-app.get('/', async (req, res, next) => {
-  res.send({ message: 'Index entry point route' });
-});
-
-// app.get('/*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '/public', '/index.html'));
-// });
 
 app.use('/users', userRouter);
 app.use('/protected/kanban', jwtCheck, kanbanRoutes);
