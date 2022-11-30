@@ -26,9 +26,9 @@ app.get('/', async (req, res, next) => {
   res.send({ message: 'App entry point' });
 });
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/public/index.html'));
-});
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/public/index.html'));
+// });
 
 export const jwtCheck = expressjwt({
   secret: jwks.expressJwtSecret({
