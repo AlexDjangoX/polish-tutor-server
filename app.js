@@ -22,8 +22,8 @@ app.use(morgan('dev'));
 
 app.use(express.static(path.join(__dirname + '/public')));
 
-app.get('/*', async (req, res, next) => {
-  res.sendFile(path.join(__dirname, '/public', '/index.html'));
+app.get('/', async (req, res, next) => {
+  res.send({ message: 'App entry point' });
 });
 
 export const jwtCheck = expressjwt({
@@ -55,7 +55,7 @@ app.use((error, req, res, next) => {
   res.status(status).send(message);
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`App running @ http://localhost:${PORT}`));
 
 export default app;
