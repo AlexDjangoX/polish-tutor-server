@@ -1,10 +1,13 @@
 import { Router } from 'express';
-import { getKanbanByUserId, createKanban } from '../controllers/kanban.js';
+import {
+  createOrGetKanbanByAuth0ID,
+  updateKanban,
+} from '../controllers/kanban.js';
 
 const router = Router();
 
-router.put('/:id', createKanban);
+router.put('/:id', updateKanban);
 
-router.get('/:id', getKanbanByUserId);
+router.get('/:id', createOrGetKanbanByAuth0ID);
 
 export default router;
