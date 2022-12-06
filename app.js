@@ -22,14 +22,6 @@ app.use(morgan('dev'));
 
 app.use(express.static(path.join(__dirname + '/build')));
 
-app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, '/build/index.html'), function (err) {
-    if (err) {
-      res.status(500).send(err);
-    }
-  });
-});
-
 export const jwtCheck = expressjwt({
   secret: jwks.expressJwtSecret({
     cache: true,
@@ -46,6 +38,14 @@ app.use(jwtCheck);
 
 app.use('/users', userRouter);
 app.use('/protected/kanban', jwtCheck, kanbanRoutes);
+
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, '/build/index.html'), function (err) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
 
 app.use((req, res, next) => {
   const error = new Error('Not found');
