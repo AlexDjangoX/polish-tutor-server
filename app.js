@@ -19,7 +19,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
-
 app.use(express.static(path.join(__dirname + '/build')));
 
 export const jwtCheck = expressjwt({
@@ -34,18 +33,14 @@ export const jwtCheck = expressjwt({
   algorithms: ['RS256'],
 }).unless({ path: ['/'] });
 
+app.get('/', async (req, res, next) => {
+  res.send({ message: 'App entry point' });
+});
+
 app.use(jwtCheck);
 
 app.use('/users', userRouter);
 app.use('/protected/kanban', jwtCheck, kanbanRoutes);
-
-app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, '/build/index.html'), function (err) {
-    if (err) {
-      res.status(500).send(err);
-    }
-  });
-});
 
 app.use((req, res, next) => {
   const error = new Error('Not found');
