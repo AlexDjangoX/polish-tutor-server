@@ -501,13 +501,11 @@ export const createOrGetKanbanByAuth0ID = async (req, res) => {
     });
 
     if (foundKanban) {
-      res.status(200).json({ data: foundKanban });
+      await res.status(200).json({ data: foundKanban });
     }
 
-    if (!foundKanban && auth_id === 'undefined') {
-      let data = seedData.data;
-
-      const user = await prisma.user.create({
+    if (!foundKanban) {
+      await prisma.user.create({
         data: { auth0ID: auth_id },
       });
 
