@@ -458,28 +458,28 @@ const seedData = {
   updatedAt: undefined,
 };
 
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 export const updateKanban = async (req, res) => {
   try {
     const kanbanData = req.body;
     const auth_id = req.params.id;
-
     if (!kanbanData || !auth_id) {
       throw new Error('Please provide content');
     }
-
     const findKanban = await prisma.kanban.findUnique({
       where: { auth0: auth_id },
     });
-
     if (!findKanban) {
       res.status(404).json({ status: 'fail', message: err });
     }
-
     const updatedKanban = await prisma.kanban.update({
       where: { auth0: auth_id },
       data: { kanbanObject: kanbanData, auth0: auth_id },
     });
-
     res.status(200).json({ data: updatedKanban });
   } catch (err) {
     console.log(err);
@@ -491,8 +491,9 @@ export const createOrGetKanbanByAuth0ID = async (req, res) => {
   try {
     const auth_id = req.params.id;
 
-    if (!auth_id) {
-      throw new Error('Please provide valid user');
+    if (auth_id === 'undefined') {
+      res.sendFile(path.join(__dirname, '../build/index.html'));
+      return;
     }
 
     const foundKanban = await prisma.kanban.findUnique({

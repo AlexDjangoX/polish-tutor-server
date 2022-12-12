@@ -4,6 +4,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import userRouter from './routes/user.js';
 import kanbanRoutes from './routes/kanban.js';
+import { reactRouterRoutesReturnHTML } from './controllers/reactRouterRoutes.js';
 import pkg from 'express-jwt';
 const { expressjwt } = pkg;
 import jwks from 'jwks-rsa';
