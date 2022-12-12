@@ -4,8 +4,6 @@ import {
   updateKanban,
 } from '../controllers/kanban.js';
 
-import { reactRouterRoutesReturnHTML } from '../controllers/reactRouterRoutes.js';
-
 const router = Router();
 
 router.put('/:id', updateKanban);
