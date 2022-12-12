@@ -9,5 +9,4 @@ const router = Router();
 router.put('/:id', updateKanban);
 
 router.get('/:id', createOrGetKanbanByAuth0ID);
-// router.get('/', reactRouterRoutesReturnHTML);
 export default router;
