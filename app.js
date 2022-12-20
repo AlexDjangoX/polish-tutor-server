@@ -4,6 +4,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import userRouter from './routes/user.js';
 import kanbanRoutes from './routes/kanban.js';
+import verbRoutes from './routes/verb.js';
 import pkg from 'express-jwt';
 const { expressjwt } = pkg;
 import jwks from 'jwks-rsa';
@@ -41,6 +42,7 @@ app.use(jwtCheck);
 
 app.use('/users', userRouter);
 app.use('/protected/kanban', jwtCheck, kanbanRoutes);
+app.use('/protected/verb', jwtCheck, verbRoutes);
 
 app.use((req, res, next) => {
   const error = new Error('Not found');

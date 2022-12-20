@@ -467,6 +467,9 @@ export const updateKanban = async (req, res) => {
   try {
     const kanbanData = req.body;
     const auth_id = req.params.id;
+    console.log('Inside update');
+    console.log(auth_id);
+
     if (!kanbanData || !auth_id) {
       throw new Error('Please provide content');
     }
@@ -490,6 +493,8 @@ export const updateKanban = async (req, res) => {
 export const createOrGetKanbanByAuth0ID = async (req, res) => {
   try {
     const auth_id = req.params.id;
+
+    console.log(auth_id);
 
     if (auth_id === 'undefined') {
       res.sendFile(path.join(__dirname, '../build/index.html'));
