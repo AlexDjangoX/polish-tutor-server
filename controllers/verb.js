@@ -48,7 +48,6 @@ export const getAllVerbsById = async (req, res) => {
 export const getAllVerbsByCategory = async (req, res) => {
   const auth0ID = req.params.id;
   const category = req.body.category;
-  console.log('CATEGORY : ', category);
 
   try {
     const verbs = await prisma.verb.findMany({
