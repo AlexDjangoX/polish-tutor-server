@@ -25,7 +25,6 @@ export const createNewVerb = async (req, res) => {
 };
 
 export const getAllVerbsById = async (req, res) => {
-  console.log('Inside get all verbs by ID : ', req.params.id);
   try {
     const auth_id = req.params.id;
 
@@ -43,5 +42,31 @@ export const getAllVerbsById = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(404).json({ status: 'fail', message: err });
+  }
+};
+
+export const getAllVerbsByCategory = async (req, res) => {
+  const auth0ID = req.params.id;
+  const category = req.body.category;
+  console.log('CATEGORY : ', category);
+
+  try {
+    const verbs = await prisma.verb.findMany({
+      where: {
+        AND: [
+          {
+            category: category,
+          },
+          {
+            auth0: auth0ID,
+          },
+        ],
+      },
+    });
+
+    res.status(200).json({ data: verbs });
+  } catch (err) {
+    console.error(err);
+    res.status(404).json({ status: 'fail', message: err.message });
   }
 };

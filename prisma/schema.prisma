@@ -52,6 +52,7 @@ model User {
 
 model Verb {
   id            Int           @id @default(autoincrement())
+  category      String
   polish_word   String
   english_word  String
   image_url     String
