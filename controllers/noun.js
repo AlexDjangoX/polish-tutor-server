@@ -1,12 +1,12 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-export const createNewVerb = async (req, res) => {
+export const createNewNoun = async (req, res) => {
   try {
     const auth_id = req.params.id;
     const data = req.body;
 
-    const createdVerb = await prisma.verb.create({
+    const createdNoun = await prisma.noun.create({
       data: {
         user: {
           connect: {
@@ -17,18 +17,18 @@ export const createNewVerb = async (req, res) => {
       },
     });
 
-    res.status(200).json({ data: createdVerb });
+    res.status(200).json({ data: createdNoun });
   } catch (err) {
     console.log(err);
     res.status(404).json({ status: 'fail', message: err });
   }
 };
 
-export const getAllVerbsById = async (req, res) => {
+export const getAllNounsById = async (req, res) => {
   try {
     const auth_id = req.params.id;
 
-    const verbs = await prisma.verb.findMany({
+    const nouns = await prisma.noun.findMany({
       where: {
         user: {
           auth0ID: {
@@ -38,19 +38,36 @@ export const getAllVerbsById = async (req, res) => {
       },
     });
 
-    res.status(200).json({ data: verbs });
+    res.status(200).json({ data: nouns });
   } catch (err) {
     console.log(err);
     res.status(404).json({ status: 'fail', message: err });
   }
 };
 
-export const getAllVerbsByCategory = async (req, res) => {
+export const updateNounById = async (req, res) => {
+  const bodyData = req.body;
+  const nounId = bodyData.id;
+
+  try {
+    const updatedNoun = await prisma.noun.update({
+      where: { id: nounId },
+      data: bodyData,
+    });
+
+    res.status(200).json({ data: updatedNoun });
+  } catch (err) {
+    console.error(err);
+    res.status(404).json({ status: 'fail', message: err.message });
+  }
+};
+
+export const getAllNounsByCategory = async (req, res) => {
   const auth0ID = req.params.id;
   const category = req.body.category;
 
   try {
-    const verbs = await prisma.verb.findMany({
+    const nouns = await prisma.noun.findMany({
       where: {
         AND: [
           {
@@ -63,7 +80,7 @@ export const getAllVerbsByCategory = async (req, res) => {
       },
     });
 
-    res.status(200).json({ data: verbs });
+    res.status(200).json({ data: nouns });
   } catch (err) {
     console.error(err);
     res.status(404).json({ status: 'fail', message: err.message });

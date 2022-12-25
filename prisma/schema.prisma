@@ -25,7 +25,7 @@ model User {
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
   kanban         Kanban?
-  verbs          Verb[]
+  verbs          Noun[]
  
  }
 
@@ -50,7 +50,7 @@ model User {
   updatedAt    DateTime      @updatedAt
 }
 
-model Verb {
+model Noun {
   id            Int           @id @default(autoincrement())
   category      String
   polish_word   String
