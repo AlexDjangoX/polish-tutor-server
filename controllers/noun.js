@@ -5,7 +5,7 @@ export const createNewNoun = async (req, res) => {
   try {
     const auth_id = req.params.id;
     const data = req.body;
-
+    console.log(data);
     const createdNoun = await prisma.noun.create({
       data: {
         user: {
@@ -47,7 +47,7 @@ export const getAllNounsById = async (req, res) => {
 
 export const updateNounById = async (req, res) => {
   const bodyData = req.body;
-  const nounId = bodyData.id;
+  const nounId = req.body.id;
 
   try {
     const updatedNoun = await prisma.noun.update({
@@ -60,6 +60,21 @@ export const updateNounById = async (req, res) => {
     console.error(err);
     res.status(404).json({ status: 'fail', message: err.message });
   }
+};
+
+export const deleteNounById = async (req, res) => {
+  const nounId = req.body.id;
+
+  const deletedNoun = await prisma.noun.delete({
+    where: {
+      id: nounId,
+    },
+  });
+
+  res.status(200).json({
+    success: true,
+    data: deletedNoun,
+  });
 };
 
 export const getAllNounsByCategory = async (req, res) => {
