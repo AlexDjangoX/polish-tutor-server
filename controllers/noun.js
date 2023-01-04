@@ -5,7 +5,6 @@ export const createNewNoun = async (req, res) => {
   try {
     const auth_id = req.params.id;
     const data = req.body;
-    console.log(data);
     const createdNoun = await prisma.noun.create({
       data: {
         user: {
