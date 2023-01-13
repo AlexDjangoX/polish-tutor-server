@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.bdd61416.css",
-    "main.js": "/static/js/main.47a3ed26.js",
+    "main.css": "/static/css/main.17ef6cb3.css",
+    "main.js": "/static/js/main.b1c3efec.js",
     "static/media/background.png": "/static/media/background.5fc571ccf7c195807c05.png",
     "static/media/form-background.jpg": "/static/media/form-background.18d9c3b39f0b98baac66.jpg",
     "static/media/krakow_01.jpg": "/static/media/krakow_01.e60782347ab7bd704af6.jpg",
     "static/media/flag_icon.jpg": "/static/media/flag_icon.fb58a396d01bd2f2de7d.jpg",
     "index.html": "/index.html",
-    "main.bdd61416.css.map": "/static/css/main.bdd61416.css.map",
-    "main.47a3ed26.js.map": "/static/js/main.47a3ed26.js.map"
+    "main.17ef6cb3.css.map": "/static/css/main.17ef6cb3.css.map",
+    "main.b1c3efec.js.map": "/static/js/main.b1c3efec.js.map"
   },
   "entrypoints": [
-    "static/css/main.bdd61416.css",
-    "static/js/main.47a3ed26.js"
+    "static/css/main.17ef6cb3.css",
+    "static/js/main.b1c3efec.js"
   ]
 }
